@@ -1,11 +1,7 @@
 class Candidaturas::Create < BaseInteractor
   def call
-    candidatura = V1::Candidatura.new(context.params)
-    context.candidatura = if candidatura.save
-                     success_response(candidatura, :ok)
-                   else
-                     invalidated_response(candidatura)
-                   end
+    candidatura = V1::Candidatura.create(context.params)
+    context.candidatura = build_response candidatura
     context.status = candidatura.valid? ? :unprocessable_entity : :ok
   end
 end

@@ -3,27 +3,11 @@ class BaseInteractor
 
   private
 
-  def success_response(data, sts)
-    status_code = sts == :ok ? 200 : 201
-    {
-      success: true,
-      status: {
-        code: status_code,
-        description: Rack::Utils::HTTP_STATUS_CODES[status_code]
-      },
-      data:
-    }
+  def build_response(data)
+    if data.respond_to? :count
+      { success: true, data: }
+    else
+      data.valid? ? { success: true, data: } : { success: false, error: { messages: data.errors } }
+    end
   end
-
-  def invalidated_response(data)
-    {
-      success: false,
-      status: {
-        code: 422,
-        description: Rack::Utils::HTTP_STATUS_CODES[422]
-      },
-      error: { messages: data.errors }
-    }
-  end
-
 end

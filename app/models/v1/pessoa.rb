@@ -1,3 +1,4 @@
 class V1::Pessoa < ApplicationRecord
-    has_and_belongs_to_many :vagas
+  has_many :candidaturas, foreign_key: :id_pessoa
+  has_many :vagas, through: :candidaturas
 end

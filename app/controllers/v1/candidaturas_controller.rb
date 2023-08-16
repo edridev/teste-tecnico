@@ -7,6 +7,11 @@ class V1::CandidaturasController < ApplicationController
     render json: result.error, status: :internal_server_error
   end
 
+  def ranking
+    result = Candidaturas::Ranking.call(id: params[:id])
+    render json: result.candidaturas, status: result.status
+  end
+
   private
 
   def candidatura_params

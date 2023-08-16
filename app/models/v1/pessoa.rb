@@ -9,6 +9,8 @@ class V1::Pessoa < ApplicationRecord
     'especialista' => 5
   }
 
+  after_initialize :set_defaults
+
   has_many :candidaturas, foreign_key: :id_pessoa
   has_many :vagas, through: :candidaturas
 
@@ -19,4 +21,8 @@ class V1::Pessoa < ApplicationRecord
   validates_inclusion_of :localizacao, in: VALID_LOCALIZACAO
 
   enum nivel: VALID_NIVEL
+
+  def set_defaults
+    self.score = 0
+  end
 end

@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_020712) do
     t.string "empresa"
     t.string "titulo"
     t.string "descricao"
-    t.integer "localizacao"
+    t.string "localizacao"
     t.integer "nivel"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

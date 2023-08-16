@@ -4,7 +4,7 @@ class CreateVagas < ActiveRecord::Migration[7.0]
       t.string :empresa
       t.string :titulo
       t.string :descricao
-      t.integer :localizacao
+      t.string :localizacao
       t.integer :nivel
 
       t.timestamps

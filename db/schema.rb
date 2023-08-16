@@ -17,6 +17,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_020712) do
   create_table "candidaturas", force: :cascade do |t|
     t.integer "id_pessoa"
     t.integer "id_vaga"
+    t.index ["id_pessoa"], name: "index_candidaturas_on_id_pessoa"
+    t.index ["id_vaga"], name: "index_candidaturas_on_id_vaga"
   end
 
   create_table "pessoas", force: :cascade do |t|
@@ -39,4 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_020712) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "candidaturas", "pessoas", column: "id_pessoa"
+  add_foreign_key "candidaturas", "vagas", column: "id_vaga"
 end

@@ -1,7 +1,7 @@
-class PessoaController < ApplicationController
+class V1::PessoaController < ApplicationController
 
   def create
-    @pessoa = Pessoa.new(pessoa_params)
+    @pessoa = V1::Pessoa.new(pessoa_params)
     if @pessoa.save
       render json: @pessoa, status: :created, location: @pessoa
     else

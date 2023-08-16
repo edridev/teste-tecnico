@@ -1,7 +1,7 @@
-class VagasController < ApplicationController
+class V1::VagasController < ApplicationController
 
   def create
-    @vaga = Vaga.new(vaga_params)
+    @vaga = V1::Vaga.new(vaga_params)
 
     if @vaga.save
       render json: @vaga, status: :created, location: @vaga

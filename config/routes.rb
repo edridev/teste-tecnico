@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
-  post '/v1/vagas', to: 'vagas#create'
-  post '/v1/pessoas', to: 'pessoas#create'
+  namespace :v1 do
+    resources :samples
+    post '/vagas', to: 'v1/vagas#create'
+    post '/pessoas', to: 'v1/pessoas#create'
+  end
 end

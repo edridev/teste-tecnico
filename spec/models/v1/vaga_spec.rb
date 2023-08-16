@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Pessoa, type: :model do
+RSpec.describe V1::Vagas, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

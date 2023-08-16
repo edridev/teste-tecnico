@@ -28,6 +28,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+/.vscode/settings.json
+
 # Comentei propositalmente para facilitar a execução do avaliador
 # .env
 

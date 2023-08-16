@@ -1,4 +1,4 @@
-class V1::PessoaController < ApplicationController
+class V1::PessoasController < ApplicationController
 
   def create
     @pessoa = V1::Pessoa.new(pessoa_params)

@@ -14,8 +14,6 @@ class V1::PessoasController < V1::ApiController
     render json: result.pessoa, status: result.status
   end
 
-  def 
-
   private
 
   def pessoa_params

@@ -10,7 +10,7 @@ class V1::CandidaturasController < V1::ApiController
   end
 
   def create
-    result = Candidaturas::Create.call(params: candidatura_params
+    result = Candidaturas::Create.call(params: candidatura_params)
     render json: result.candidatura, status: result.status
   end
 
@@ -24,5 +24,4 @@ class V1::CandidaturasController < V1::ApiController
   def candidatura_params
     params.require(:candidatura).permit(:id_pessoa, :id_vaga)
   end
-
 end

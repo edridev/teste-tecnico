@@ -7,6 +7,7 @@ RSpec.describe V1::Pessoa, type: :model do
     it { should have_many(:linguas).with_foreign_key('id_pessoa') }
     it { should have_many(:candidaturas).with_foreign_key('id_pessoa') }
     it { should have_many(:vagas).through(:candidaturas) }
+    it { should validate_uniqueness_of(:nome) }
     it do
       should validate_inclusion_of(:nivel).in_range(1..5)
     end

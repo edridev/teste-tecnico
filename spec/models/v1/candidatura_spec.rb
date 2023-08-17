@@ -6,6 +6,7 @@ RSpec.describe V1::Candidatura, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:id_pessoa) }
     it { should validate_presence_of(:id_vaga) }
+    it { should validate_uniqueness_of(:id_pessoa).scoped_to(:id_vaga) }
   end
 
   describe 'associations' do

@@ -7,8 +7,9 @@ RSpec.describe V1::Lingua, type: :model do
     it { should validate_presence_of(:id_pessoa) }
     it { should validate_presence_of(:id_idioma) }
     it { should validate_presence_of(:grau) }
+    it { should validate_uniqueness_of(:id_pessoa).scoped_to(:id_idioma).case_insensitive }
     it do
-      should validate_inclusion_of(:grau).in_array(V1::Idioma::LEVEL_IDIOMAS)
+      should validate_inclusion_of(:grau).in_array(V1::Lingua::LEVEL_IDIOMAS)
     end
   end
 

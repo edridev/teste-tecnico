@@ -19,6 +19,8 @@ RSpec.describe V1::Vaga, type: :model do
 
     it { should validate_presence_of(:nivel) }
 
+    it { should validate_uniqueness_of(:titulo).scoped_to(:empresa) }
+
     it do
       should validate_inclusion_of(:nivel).in_range(1..5)
     end

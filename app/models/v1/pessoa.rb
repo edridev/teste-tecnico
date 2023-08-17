@@ -24,6 +24,8 @@ class V1::Pessoa < ApplicationRecord
 
   validates_inclusion_of :nivel, in: 1..5
 
+  validates_uniqueness_of :nome
+
   def set_defaults
     self.score = 0
   end

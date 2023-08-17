@@ -1,3 +1,3 @@
 class V1::Idioma < ApplicationRecord
-  validates_presence_of :nome
+  validates :nome, presence: true, uniqueness: true
 end

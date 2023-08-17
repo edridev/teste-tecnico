@@ -5,5 +5,6 @@ RSpec.describe V1::Idioma, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:nome) }
+    it { should validate_uniqueness_of(:nome) }
   end
 end

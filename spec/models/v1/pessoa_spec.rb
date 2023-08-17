@@ -4,8 +4,15 @@ RSpec.describe V1::Pessoa, type: :model do
   subject { build(:pessoa) }
 
   describe 'associations' do
+    it { should have_many(:linguas).with_foreign_key('id_pessoa') }
     it { should have_many(:candidaturas).with_foreign_key('id_pessoa') }
     it { should have_many(:vagas).through(:candidaturas) }
+    it do
+      should validate_inclusion_of(:nivel).in_range(1..5)
+    end
+    it do
+      should validate_inclusion_of(:localizacao).in_array(V1::Pessoa::VALID_LOCALIZACAO)
+    end
   end
 
   describe 'validations' do
@@ -18,13 +25,5 @@ RSpec.describe V1::Pessoa, type: :model do
     it { should validate_presence_of(:nivel) }
 
     it { should validate_presence_of(:score) }
-
-    it do
-      should validate_inclusion_of(:nivel).in_range(1..5)
-    end
-
-    it do
-      should validate_inclusion_of(:localizacao).in_array(%w[A B C D E F])
-    end
   end
 end

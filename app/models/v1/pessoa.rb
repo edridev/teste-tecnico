@@ -14,6 +14,8 @@ class V1::Pessoa < ApplicationRecord
   has_many :candidaturas, foreign_key: :id_pessoa
   has_many :vagas, through: :candidaturas
 
+  has_many :linguas, foreign_key: 'id_pessoa'
+
   validates_presence_of :nome, :profissao, :localizacao, :nivel, :score
 
   validates_inclusion_of :score, in: VALID_SCORE

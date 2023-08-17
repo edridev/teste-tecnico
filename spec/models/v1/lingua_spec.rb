@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Lingua, type: :model do
+RSpec.describe V1::Lingua, type: :model do
   subject { build(:lingua) }
 
   describe 'validations' do

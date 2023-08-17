@@ -5,6 +5,5 @@ FactoryBot.define do
     localizacao { V1::Pessoa::VALID_LOCALIZACAO.sample }
     nivel { 3 }
     score { 0 }
-    linguas { create_list(:lingua, 2) }
   end
 end

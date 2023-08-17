@@ -1,12 +1,12 @@
 class V1::Pessoa < ApplicationRecord
   VALID_SCORE = [0, 25, 50, 75, 100]
   VALID_LOCALIZACAO = %w[A B C D E F]
-  VALID_NIVEL = {
-    'estagiário' => 1,
-    'júnior' => 2,
-    'pleno' => 3,
-    'sênior' => 4,
-    'especialista' => 5
+  NIVEIS = {
+    1 => 'estagiário',
+    2 => 'júnior',
+    3 => 'pleno',
+    4 => 'sênior',
+    5 => 'especialista'
   }
 
   after_initialize :set_defaults
@@ -20,7 +20,7 @@ class V1::Pessoa < ApplicationRecord
 
   validates_inclusion_of :localizacao, in: VALID_LOCALIZACAO
 
-  enum nivel: VALID_NIVEL
+  validates_inclusion_of :nivel, in: 1..5
 
   def set_defaults
     self.score = 0

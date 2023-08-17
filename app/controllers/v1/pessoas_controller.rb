@@ -1,10 +1,12 @@
-class V1::PessoasController < ApplicationController
+class V1::PessoasController < V1::ApiController
+  def index
+    result = Pessoas::Index.call
+    render json: result.pessoas, status: result.status
+  end
+
   def create
     result = Pessoas::Create.call(params: pessoa_params)
     render json: result.pessoa, status: result.status
-  rescue StandardError => e
-    result = Application::ErrorInteractor.call(param: e)
-    render json: result.error, status: :internal_server_error
   end
 
   private

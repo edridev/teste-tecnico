@@ -1,10 +1,13 @@
-class V1::CandidaturasController < ApplicationController
+class V1::CandidaturasController < V1::ApiController
+
+  def index
+    result = Candidaturas::Index.call
+    render json: result.candidaturas, status: result.status
+  end
+
   def create
     result = Candidaturas::Create.call(params: candidatura_params)
     render json: result.candidatura, status: result.status
-  rescue StandardError => e
-    result = Application::ErrorInteractor.call(param: e)
-    render json: result.error, status: :internal_server_error
   end
 
   def ranking

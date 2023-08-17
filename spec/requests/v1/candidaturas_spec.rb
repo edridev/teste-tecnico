@@ -1,6 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe '/v1/pessoas', type: :request do
+RSpec.describe '/v1/candidaturas', type: :request do
+  describe 'GET /index' do
+    it 'renders a successful response' do
+      create(:candidatura, valid_attributes)
+      get v1_candida: candidaturas_url, headers: valid_headers, as: :json
+      expect(response).to be_successful
+      expect(response.parsed_body).not_to be_empty
+    end
+  end
+
   describe 'POST /create' do
     before(:all) do
       valid_attributes = {

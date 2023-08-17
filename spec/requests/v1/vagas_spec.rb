@@ -3,6 +3,15 @@ require 'rails_helper'
 RSpec.describe '/v1/vagas', type: :request do
   include_context 'vagas_attributes'
 
+  describe 'GET /index' do
+    it 'renders a successful response' do
+      create(:vaga, valid_attributes)
+      get v1_vagas_url, headers: valid_headers, as: :json
+      expect(response).to be_successful
+      expect(response.parsed_body).not_to be_empty
+    end
+  end
+
   describe 'POST /create' do
     context 'with valid parameters' do
       it 'creates a new Vagas' do

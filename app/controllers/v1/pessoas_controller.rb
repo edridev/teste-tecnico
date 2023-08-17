@@ -4,10 +4,17 @@ class V1::PessoasController < V1::ApiController
     render json: result.pessoas, status: result.status
   end
 
+  def show
+    result = Pessoas::Show.call(id: params[:id])
+    render json: result.pessoa, status: result.status
+  end
+
   def create
     result = Pessoas::Create.call(params: pessoa_params)
     render json: result.pessoa, status: result.status
   end
+
+  def 
 
   private
 

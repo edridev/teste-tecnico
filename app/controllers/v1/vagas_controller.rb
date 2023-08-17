@@ -5,6 +5,11 @@ class V1::VagasController < V1::ApiController
     render json: result.vagas, status: result.status
   end
 
+  def show
+    result = Vagas::Show.call(id: params[:id])
+    render json: result.vaga, status: result.status
+  end
+
   def create
     result = Vagas::Create.call(params: vaga_params)
     render json: result.vaga, status: result.status

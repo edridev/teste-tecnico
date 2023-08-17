@@ -47,6 +47,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.2.0'
   gem 'faker', '~> 3.2.1'
   gem 'rspec-rails', '~> 6.0.0'
+  gem 'rswag-specs'
 end
 
 group :development do
@@ -55,3 +56,5 @@ group :development do
 end
 
 gem 'interactor', '~> 3.0'
+gem 'rswag-api'
+gem 'rswag-ui'

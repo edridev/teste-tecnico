@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe VacanciesController, type: :routing do
+RSpec.describe V1::VagasController, type: :routing do
   describe 'routing' do
     it 'routes to #create' do
-      expect(post: '/vagas').to route_to('vagas#create')
+      should route(:post, '/v1/vagas').to('v1/vagas#create')
     end
   end
 end

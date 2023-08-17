@@ -31,5 +31,5 @@
 /.vscode/settings.json
 
 # Comentei propositalmente para facilitar a execução do avaliador
-# .env
+.env
 

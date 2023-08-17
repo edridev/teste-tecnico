@@ -1,9 +1,8 @@
-class Vagas::Index
+class Pessoas::Show
   include Interactor
 
   def call
-    context.vagas = V1::Vaga.all
+    context.pessoa = V1::Vaga.find(context.id)
     context.status = :ok
   end
-  
 end

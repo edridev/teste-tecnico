@@ -4,4 +4,5 @@ class Candidaturas::Create < BaseInteractor
     context.candidatura = build_response candidatura
     context.status = candidatura.valid? ? :created : :unprocessable_entity
   end
+  
 end

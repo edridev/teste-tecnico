@@ -1,7 +1,10 @@
-class Candidaturas::Index < BaseInteractor
+class Candidaturas::Index
+  include Interactor
+
   def call
-    candidaturas = V1::Candidatura.includes(:pessoa, :vaga).order('vagas.empresa, pessoas.nome')
-    context.candidaturas = Domain::Candidaturas::Serialize.call(data: candidaturas)
+    candidaturas = V1::Candidatura.all
+    context.candidaturas = candidaturas
     context.status = :ok
   end
+
 end

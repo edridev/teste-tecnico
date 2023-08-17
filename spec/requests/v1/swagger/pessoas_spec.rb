@@ -2,7 +2,7 @@ require 'swagger_helper'
 
 describe 'Teste Técnico API' do
   path '/v1/pessoas' do
-    post 'Creates a pessoa' do
+    post 'Adiciona uma pessoa' do
       tags 'Pessoa'
       consumes 'application/json'
       parameter name: :blog, in: :body, schema: {
@@ -17,7 +17,7 @@ describe 'Teste Técnico API' do
         required: %w[nome profissao localizacao nivel score]
       }
 
-      response '201', 'blog created' do
+      response '201', 'Pessoa adicionada' do
         let(:blog) do
           {
             nome: 'Marcos Alcantara',
@@ -30,7 +30,7 @@ describe 'Teste Técnico API' do
         run_test!
       end
 
-      response '422', 'invalid request' do
+      response '422', 'Requisição inválida' do
         let(:blog) { { localizacao: 'Z' } }
         run_test!
       end

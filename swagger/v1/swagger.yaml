@@ -6,15 +6,15 @@ info:
 paths:
   "/v1/candidaturas":
     post:
-      summary: Creates a pessoa
+      summary: Adiciona uma candidatura
       tags:
       - Pessoa
       parameters: []
       responses:
         '201':
-          description: blog created
+          description: Vaga criada
         '422':
-          description: invalid request
+          description: Requisição inválida
       requestBody:
         content:
           application/json:
@@ -26,19 +26,19 @@ paths:
                 id_vaga:
                   type: integer
               required:
-              - ed_pessoa,
+              - id_pessoa,
               - id_vaga
   "/v1/pessoas":
     post:
-      summary: Creates a pessoa
+      summary: Adiciona uma pessoa
       tags:
       - Pessoa
       parameters: []
       responses:
         '201':
-          description: blog created
+          description: Pessoa adicionada
         '422':
-          description: invalid request
+          description: Requisição inválida
       requestBody:
         content:
           application/json:
@@ -63,15 +63,15 @@ paths:
               - score
   "/v1/vagas":
     post:
-      summary: Creates a vaga
+      summary: Adiciona uma vaga
       tags:
       - Vagas
       parameters: []
       responses:
         '201':
-          description: blog created
+          description: Vaga adicionada
         '422':
-          description: invalid request
+          description: Requisição inválida
       requestBody:
         content:
           application/json:
@@ -94,6 +94,14 @@ paths:
               - descricao
               - localizacao
               - nivel
+    get:
+      summary: Lista vagas
+      tags:
+      - Vagas
+      description: Lista todas as vagas disponíveis
+      responses:
+        '200':
+          description: successful
 servers:
 - url: https://{defaultHost}
   variables:

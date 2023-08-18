@@ -1,9 +1,8 @@
 class Candidaturas::Ranking < BaseInteractor
-
   def call
-    candidaturas = V1::Candidatura.join(:pessoas).select(cols)
-      .where('candidaturas.id_vaga = ?', context.id)
-        .order('pessoas.score desc')
+    candidaturas = V1::Candidatura.joins(:pessoa).select(cols)
+                                  .where('candidaturas.id_vaga = ?', context.id)
+                                  .order('pessoas.score desc')
 
     context.candidaturas = candidaturas
 
@@ -24,6 +23,4 @@ class Candidaturas::Ranking < BaseInteractor
       'candidaturas.updated_at'
     ]
   end
-
-
 end

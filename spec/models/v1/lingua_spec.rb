@@ -37,7 +37,18 @@ RSpec.describe V1::Lingua, type: :model do
   end
 
   describe 'associations' do
-    it { should belong_to(:pessoa).with_foreign_key('id_pessoa') }
-    it { should belong_to(:idioma).with_foreign_key('id_idioma') }
+    it 'belongs to pessoa' do
+      expect(subject.respond_to?(:pessoa)).to be true
+      pessoa = create(:pessoa)
+      lingua = create(:lingua, id_pessoa: pessoa.id, id_idioma: create(:idioma).id)
+      expect(lingua.pessoa).to eq(pessoa)
+    end
+
+    it 'belongs to idioma' do
+      expect(subject.respond_to?(:idioma)).to be true
+      idioma = create(:idioma)
+      lingua = create(:lingua, id_idioma: idioma.id, id_pessoa: create(:pessoa).id)
+      expect(lingua.idioma).to eq(idioma)
+    end
   end
 end

@@ -67,7 +67,7 @@ RSpec.describe V1::Pessoa, type: :model do
     it 'has many candidaturas' do
       pessoa = create(:pessoa)
       3.times do
-        jrow = build(:candidatura, :with_vaga).as_json.compact
+        jrow = build(:candidatura, id_pessoa: nil).as_json.compact
         pessoa.candidaturas.create(jrow)
       end
       expect(pessoa.candidaturas.count).to eq(3)
@@ -76,7 +76,7 @@ RSpec.describe V1::Pessoa, type: :model do
     it 'has many vagas through candidaturas' do
       pessoa = create(:pessoa)
       3.times do
-        jrow = build(:candidatura, :with_vaga).as_json.compact
+        jrow = build(:candidatura, id_pessoa: nil).as_json.compact
         pessoa.candidaturas.create(jrow)
       end
       expect(pessoa.candidaturas.count).to eq(pessoa.vagas.count)

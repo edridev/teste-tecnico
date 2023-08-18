@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe V1::Candidatura, type: :model do
-  subject { build(:candidatura, :full) }
+  subject { build(:candidatura) }
 
   describe 'validations' do
     it 'is valid with valid attributes' do

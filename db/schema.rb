@@ -30,11 +30,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_131028) do
   end
 
   create_table "linguas", force: :cascade do |t|
-    t.string "id_pessoa"
-    t.string "id_idioma"
+    t.integer "id_pessoa"
+    t.integer "id_idioma"
     t.string "grau"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["id_idioma"], name: "index_linguas_on_id_idioma"
+    t.index ["id_pessoa"], name: "index_linguas_on_id_pessoa"
   end
 
   create_table "pessoas", force: :cascade do |t|
@@ -59,4 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_131028) do
 
   add_foreign_key "candidaturas", "pessoas", column: "id_pessoa"
   add_foreign_key "candidaturas", "vagas", column: "id_vaga"
+  add_foreign_key "linguas", "idiomas", column: "id_idioma"
+  add_foreign_key "linguas", "pessoas", column: "id_pessoa"
 end

@@ -37,7 +37,6 @@ gem 'bootsnap', require: false
 # gem "rack-cors"
 
 group :test do
-  gem 'shoulda-matchers', '~> 5.0'
   gem 'database_cleaner-active_record'
 end
 

@@ -63,9 +63,4 @@ RSpec.configure do |config|
 end
 
 # allows Shoulda Matchers to the test lib
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
-  end
 end

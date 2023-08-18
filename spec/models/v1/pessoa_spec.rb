@@ -3,28 +3,83 @@ require 'rails_helper'
 RSpec.describe V1::Pessoa, type: :model do
   subject { build(:pessoa) }
 
-  describe 'associations' do
-    it { should have_many(:linguas).with_foreign_key('id_pessoa') }
-    it { should have_many(:candidaturas).with_foreign_key('id_pessoa') }
-    it { should have_many(:vagas).through(:candidaturas) }
-    it { should validate_uniqueness_of(:nome) }
-    it do
-      should validate_inclusion_of(:nivel).in_range(1..5)
+  describe 'validations' do
+    it 'is valid with valid attributes' do
+      expect(subject).to be_valid
     end
-    it do
-      should validate_inclusion_of(:localizacao).in_array(V1::Pessoa::VALID_LOCALIZACAO)
+
+    it 'is not valid without a nome' do
+      subject.nome = nil
+      expect(subject).to_not be_valid
+    end
+    it 'is not valid without a profissao' do
+      subject.profissao = nil
+      expect(subject).to_not be_valid
+    end
+    it 'is not valid without a localizacao' do
+      subject.localizacao = nil
+      expect(subject).to_not be_valid
+    end
+    it 'is not valid without a nivel' do
+      subject.nivel = nil
+      expect(subject).to_not be_valid
+    end
+    it 'is not valid without a score' do
+      subject.score = nil
+      expect(subject).to_not be_valid
+    end
+
+    it 'if invalid when nivel is out of range(1..5)' do
+      subject.nivel = 6
+      expect(subject).to_not be_valid
+    end
+
+    it 'if invalid when localizacao is out of range(1..5)' do
+      subject.localizacao = 'Z'
+      expect(subject).to_not be_valid
+    end
+
+    it 'is not valid with duplicate nome' do
+      create(:pessoa, nome: subject.nome)
+      expect(subject).to_not be_valid
     end
   end
 
-  describe 'validations' do
-    it { should validate_presence_of(:nome) }
+  describe 'associations' do
+    it 'has many linguas' do
+      pessoa = create(:pessoa)
+      3.times do
+        pessoa.linguas.build build(:lingua, :with_idioma).as_json
+      end
+      pessoa.save
+      expect(pessoa.linguas.count).to eq(3)
+    end
 
-    it { should validate_presence_of(:profissao) }
+    it 'has many idiomas through linguas' do
+      pessoa = create(:pessoa)
+      3.times do
+        pessoa.linguas.build build(:lingua, :with_idioma).as_json
+      end
+      pessoa.save
+      expect(pessoa.linguas.count).to eq(pessoa.idiomas.count)
+    end
 
-    it { should validate_presence_of(:localizacao) }
+    it 'has many candidaturas' do
+      pessoa = create(:pessoa)
+      3.times do
+        jrow = build(:candidatura, :with_vaga).as_json.compact
+        pessoa.candidaturas.create(jrow)
+      end
+      expect(pessoa.candidaturas.count).to eq(3)
+    end
 
-    it { should validate_presence_of(:nivel) }
-
-    it { should validate_presence_of(:score) }
+    it 'has many vagas through candidaturas' do
+      pessoa = create(:pessoa)
+      3.times do
+        jrow = build(:candidatura, :with_vaga).as_json.compact
+        pessoa.candidaturas.create(jrow)
+      end
+      expect(pessoa.candidaturas.count).to eq(pessoa.vagas.count)
+    end
   end
 end

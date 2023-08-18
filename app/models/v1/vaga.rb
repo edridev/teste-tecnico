@@ -8,7 +8,7 @@ class V1::Vaga < ApplicationRecord
     5 => 'especialista'
   }
 
-  has_many :candidaturas, foreign_key: 'id_vaga'
+  has_many :candidaturas, foreign_key: :id_vaga
   has_many :pessoas, through: :candidaturas
 
   validates_presence_of :empresa, :titulo, :descricao, :localizacao, :nivel

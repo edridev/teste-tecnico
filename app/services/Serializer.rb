@@ -1,17 +1,20 @@
 class Serializer
-
   def self.run(data)
+    valid = if data.respond_to?(:count)
+              data.count > 0
+            else
+              data.valid?
+            end
 
-    res = if data.valid?
-      { success: true, data: }
-    else
-      { success: false, messages: data.errors }
-    end
+    res = if valid
+            { success: true, data: }
+          else
+            { success: false, messages: data.errors }
+          end
 
     {
-      json: res, 
-      status: (data.valid? ? :created : :unprocessable_entity)
+      json: res,
+      status: (valid ? :created : :unprocessable_entity)
     }
   end
-
 end

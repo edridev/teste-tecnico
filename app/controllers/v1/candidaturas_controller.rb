@@ -24,6 +24,6 @@ class V1::CandidaturasController < V1::ApiController
   private
 
   def candidatura_params
-    params.require(:candidatura).permit(:id_pessoa, :id_candidatura)
+    params.require(:candidatura).permit(:id_pessoa, :id_vaga)
   end
 end

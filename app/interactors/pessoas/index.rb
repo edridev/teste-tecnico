@@ -1,6 +1,5 @@
-class Pessoas::Index < BaseInteractor
-  def call
-    context.pessoas = V1::Pessoa.all
-    context.status = :ok
-  end
+class Pessoas::Index
+  include Interactor::Organizer
+
+  organize Domain::SetPagination, Vagas::GetAll, Domain::StatusOk
 end

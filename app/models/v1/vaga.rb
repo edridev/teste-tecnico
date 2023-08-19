@@ -11,6 +11,8 @@ class V1::Vaga < ApplicationRecord
   has_many :candidaturas, foreign_key: :id_vaga
   has_many :pessoas, through: :candidaturas
 
+  belongs_to :idioma, optional: true
+
   validates_presence_of :empresa, :titulo, :descricao, :localizacao, :nivel
 
   validates_inclusion_of :localizacao, in: VALID_LOCALIZACAO

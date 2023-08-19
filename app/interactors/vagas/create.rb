@@ -1,7 +1,9 @@
-class Vagas::Create < BaseInteractor
+class Vagas::Create
+  include Interactor
+
   def call
-    vaga = V1::Vaga.create(context.params)
-    context.vaga = build_response vaga
-    context.status = vaga.valid? ? :created : :unprocessable_entity
+    data = V1::Vaga.create(context.params)
+    context.data = Domain::Response.call(data:).body
+    context.status = Domain::Status.call(data:).status
   end
 end

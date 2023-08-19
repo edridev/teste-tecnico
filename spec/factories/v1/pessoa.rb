@@ -4,6 +4,7 @@ FactoryBot.define do
     profissao { 'Engenheiro de Software' }
     localizacao { V1::Pessoa::VALID_LOCALIZACAO.sample }
     nivel { 3 }
-    score { 0 }
+    distancia_maxima { [40, 45, 50, 55].sample }
+    experiencia { 'Atuo como Engenheiro de Software a X anos' }
   end
 end

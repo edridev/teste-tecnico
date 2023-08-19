@@ -1,6 +1,8 @@
-class Idiomas::Index < BaseInteractor
+class Idiomas::Index
+  include Interactor
+
   def call
-    context.idiomas = V1::Idioma.all
+    context.data = V1::Idioma.all
     context.status = :ok
   end
 end

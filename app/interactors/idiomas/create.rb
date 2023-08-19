@@ -1,7 +1,9 @@
-class Idiomas::Create < BaseInteractor
+class Idiomas::Create
+  include Interactor
+
   def call
-    idioma = V1::Idioma.create(context.params)
-    context.idioma = build_response idioma
-    context.status = idioma.valid? ? :created : :unprocessable_entity
+    data = V1::Idioma.create(context.params)
+    context.data = Domain::Response.call(data:).body
+    context.status = Domain::Status.call(data:).status
   end
 end

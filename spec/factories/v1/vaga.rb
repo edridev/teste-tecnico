@@ -5,5 +5,6 @@ FactoryBot.define do
     descricao { V1::Pessoa::VALID_LOCALIZACAO.sample }
     localizacao { 'F' }
     nivel { 5 }
+    idioma
   end
 end

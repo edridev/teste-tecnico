@@ -20,22 +20,11 @@ RSpec.describe V1::Idioma, type: :model do
   end
 
   describe 'associations' do
-    it 'has many linguas' do
+    it 'has and belongs to many pessoas' do
       idioma = create(:idioma)
-      3.times do
-        idioma.linguas.build build(:lingua, :with_pessoa).as_json
-      end
-      idioma.save
-      expect(idioma.linguas.count).to eq(3)
-    end
-
-    it 'has many pessoas through linguas' do
-      idioma = create(:idioma)
-      3.times do
-        idioma.linguas.build build(:lingua, :with_idioma).as_json
-      end
-      idioma.save
-      expect(idioma.linguas.count).to eq(idioma.pessoas.count)
+      expect(idioma.pessoas.count).to eq(0)
+      idioma.pessoas << create_list(:pessoa, 3)
+      expect(idioma.pessoas.count).to eq(3)
     end
   end
 end

@@ -6,7 +6,8 @@ RSpec.shared_context 'vagas_attributes' do
       titulo: Faker::Name.name,
       descricao: Faker::Lorem.paragraph,
       localizacao: 'F',
-      nivel: 5
+      nivel: 5,
+      idioma_id: create(:idioma).id
     }
   end
 

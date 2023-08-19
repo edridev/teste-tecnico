@@ -9,10 +9,10 @@ RSpec.describe '/v1/pessoas', type: :request do
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      pessoa = create_list(:pessoa, 5).as_json
+      pessoas = create_list(:pessoa, 5).as_json
       get v1_pessoas_url, headers: valid_headers, as: :json
       expect(response).to be_successful
-      expect(response.parsed_body).to eq(pessoa)
+      expect(response.parsed_body).to eq(pessoas)
     end
   end
 

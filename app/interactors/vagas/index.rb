@@ -1,9 +1,5 @@
 class Vagas::Index
-  include Interactor
+  include Interactor::Organizer
 
-  def call
-    context.vagas = V1::Vaga.all
-    context.status = :ok
-  end
-  
+  organize Domain::SetPagination, Vagas::GetAll, Domain::StatusOk
 end

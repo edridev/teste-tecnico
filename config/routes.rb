@@ -6,10 +6,9 @@ Rails.application.routes.draw do
       get '/candidaturas/ranking', to: 'candidaturas#ranking'
     end
     resources :pessoas, only: %i[index show create] do
-      resources :linguas, only: %i[index show create]
+      post '/idiomas', to: 'idiomas#add_to_pessoa'
     end
     resources :candidaturas, only: %i[index show create]
     resources :idiomas, only: %i[index show create]
-    # get '/vagas/:id/candidaturas/ranking', to: 'candidaturas#ranking'
   end
 end

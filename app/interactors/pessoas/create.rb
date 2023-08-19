@@ -1,7 +1,9 @@
-class Pessoas::Create < BaseInteractor
+class Pessoas::Create
+  include Interactor
+
   def call
-    pessoa = V1::Pessoa.create(context.params)
-    context.pessoa = build_response pessoa
-    context.status = pessoa.valid? ? :created : :unprocessable_entity
+    data = V1::Pessoa.create(context.params)
+    context.data = Domain::Response.call(data:).body
+    context.status = Domain::Status.call(data:).status
   end
 end

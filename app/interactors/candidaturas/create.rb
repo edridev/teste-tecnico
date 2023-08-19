@@ -1,8 +1,9 @@
-class Candidaturas::Create < BaseInteractor
+class Candidaturas::Create
+  include Interactor
+
   def call
-    candidatura = V1::Candidatura.create(context.params)
-    context.candidatura = build_response candidatura
-    context.status = candidatura.valid? ? :created : :unprocessable_entity
+    data = V1::Candidatura.create(context.params)
+    context.data = Domain::Response.call(data:).body
+    context.status = Domain::Status.call(data:).status
   end
-  
 end

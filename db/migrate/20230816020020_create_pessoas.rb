@@ -5,7 +5,6 @@ class CreatePessoas < ActiveRecord::Migration[7.0]
       t.string :profissao
       t.string :localizacao
       t.integer :nivel
-      t.integer :score
 
       t.timestamps
     end

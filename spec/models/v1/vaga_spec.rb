@@ -72,5 +72,13 @@ RSpec.describe V1::Vaga, type: :model do
       end
       expect(vaga.candidaturas.count).to eq(vaga.pessoas.count)
     end
+
+    it 'belongs to idioma' do
+      expect(subject.respond_to?(:idioma)).to be true
+      idioma = create(:idioma)
+      vaga = create(:vaga, idioma_id: idioma.id)
+      expect(vaga.idioma).to eq(idioma)
+    end
+
   end
 end

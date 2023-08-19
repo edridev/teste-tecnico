@@ -8,6 +8,10 @@ RSpec.describe V1::Pessoa, type: :model do
       expect(subject).to be_valid
     end
 
+    it 'is not valid without a experiencia' do
+      subject.experiencia = nil
+      expect(subject).to_not be_valid
+    end
     it 'is not valid without a nome' do
       subject.nome = nil
       expect(subject).to_not be_valid
@@ -22,10 +26,6 @@ RSpec.describe V1::Pessoa, type: :model do
     end
     it 'is not valid without a nivel' do
       subject.nivel = nil
-      expect(subject).to_not be_valid
-    end
-    it 'is not valid without a score' do
-      subject.score = nil
       expect(subject).to_not be_valid
     end
 
@@ -46,24 +46,6 @@ RSpec.describe V1::Pessoa, type: :model do
   end
 
   describe 'associations' do
-    it 'has many linguas' do
-      pessoa = create(:pessoa)
-      3.times do
-        pessoa.linguas.build build(:lingua, :with_idioma).as_json
-      end
-      pessoa.save
-      expect(pessoa.linguas.count).to eq(3)
-    end
-
-    it 'has many idiomas through linguas' do
-      pessoa = create(:pessoa)
-      3.times do
-        pessoa.linguas.build build(:lingua, :with_idioma).as_json
-      end
-      pessoa.save
-      expect(pessoa.linguas.count).to eq(pessoa.idiomas.count)
-    end
-
     it 'has many candidaturas' do
       pessoa = create(:pessoa)
       3.times do
@@ -80,6 +62,13 @@ RSpec.describe V1::Pessoa, type: :model do
         pessoa.candidaturas.create(jrow)
       end
       expect(pessoa.candidaturas.count).to eq(pessoa.vagas.count)
+    end
+
+    it 'has and belongs to many idiomas' do
+      pessoas = create(:pessoa)
+      expect(pessoas.idiomas.count).to eq(0)
+      pessoas.idiomas << create_list(:idioma, 3)
+      expect(pessoas.idiomas.count).to eq(3)
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_17_131028) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_19_170007) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_131028) do
     t.integer "id_vaga"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "percurso"
+    t.integer "distancia"
+    t.integer "score"
     t.index ["id_pessoa"], name: "index_candidaturas_on_id_pessoa"
     t.index ["id_vaga"], name: "index_candidaturas_on_id_vaga"
   end
@@ -29,14 +32,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_131028) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "linguas", force: :cascade do |t|
-    t.integer "id_pessoa"
-    t.integer "id_idioma"
-    t.string "grau"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["id_idioma"], name: "index_linguas_on_id_idioma"
-    t.index ["id_pessoa"], name: "index_linguas_on_id_pessoa"
+  create_table "idiomas_pessoas", id: false, force: :cascade do |t|
+    t.bigint "idioma_id", null: false
+    t.bigint "pessoa_id", null: false
+    t.index ["idioma_id", "pessoa_id"], name: "index_idiomas_pessoas_on_idioma_id_and_pessoa_id"
+    t.index ["pessoa_id"], name: "index_idiomas_pessoas_on_pessoa_id"
   end
 
   create_table "pessoas", force: :cascade do |t|
@@ -44,9 +44,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_131028) do
     t.string "profissao"
     t.string "localizacao"
     t.integer "nivel"
-    t.integer "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "distancia_maxima"
+    t.text "experiencia"
   end
 
   create_table "vagas", force: :cascade do |t|
@@ -57,10 +58,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_131028) do
     t.integer "nivel"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "idioma_id"
+    t.index ["idioma_id"], name: "index_vagas_on_idioma_id"
   end
 
   add_foreign_key "candidaturas", "pessoas", column: "id_pessoa"
   add_foreign_key "candidaturas", "vagas", column: "id_vaga"
-  add_foreign_key "linguas", "idiomas", column: "id_idioma"
-  add_foreign_key "linguas", "pessoas", column: "id_pessoa"
 end

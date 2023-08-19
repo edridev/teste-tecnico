@@ -1,17 +1,19 @@
 class V1::PessoasController < V1::ApiController
   def index
-    result = Pessoas::Index.call page: params[:page], per_page: params[:per_page]
-    render json: result.data, status: result.status
+    pessoas = V1::Pessoa.all
+
+    render json: pessoas
   end
 
   def show
-    result = Pessoas::Show.call(id: params[:id])
-    render json: result.data, status: result.status
+    pessoa = V1::Pessoa.find(params[:id])
+    render json: pessoa
   end
 
   def create
-    result = Pessoas::Create.call(params: pessoa_params)
-    render json: result.data, status: result.status
+    pessoa = V1::Pessoa.new(pessoa_params)
+    pessoa.save
+    render Serializer.run(pessoa)
   end
 
   private

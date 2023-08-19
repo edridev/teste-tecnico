@@ -1,20 +1,24 @@
 class V1::IdiomasController < V1::ApiController
+
   def index
-    result = Idiomas::Index.call page: params[:page], per_page: params[:per_page]
-    render json: result.data, status: result.status
+    idiomas = V1::Idioma.all
+
+    render json: idiomas
   end
 
   def show
-    result = Idiomas::Show.call(id: params[:id])
-    render json: result.data, status: result.status
+    idioma = V1::Idioma.find(params[:id])
+    render json: idioma
   end
 
   def create
-    result = Idiomas::Create.call(params: idioma_params)
-    render json: result.data, status: result.status
+    idioma = V1::Idioma.new(idioma_params)
+    idioma.save
+    render Serializer.run(idioma)
   end
 
   def add_to_pessoa
+    
     result = Idiomas::AddToPessoa.call(pessoa_id: params[:pessoa_id], params: idioma_params)
     render json: result.data, status: result.status
   end

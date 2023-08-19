@@ -1,17 +1,20 @@
 class V1::VagasController < V1::ApiController
+
   def index
-    result = Vagas::Index.call page: params[:page], per_page: params[:per_page]
-    render json: result.data, status: result.status
+    vagas = V1::Vaga.all
+
+    render json: vagas
   end
 
   def show
-    result = Vagas::Show.call(id: params[:id])
-    render json: result.data, status: result.status
+    vaga = V1::Vaga.find(params[:id])
+    render json: vaga
   end
 
   def create
-    result = Vagas::Create.call(params: vaga_params)
-    render json: result.data, status: result.status
+    vaga = V1::Vaga.new(vaga_params)
+    vaga.save
+    render Serializer.run(vaga)
   end
 
   private

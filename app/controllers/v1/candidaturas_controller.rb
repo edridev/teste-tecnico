@@ -1,27 +1,29 @@
 class V1::CandidaturasController < V1::ApiController
   def index
-    result = Candidaturas::Index.call page: params[:page], per_page: params[:per_page]
-    render json: result.data, status: result.status
+    candidaturas = V1::Candidatura.all
+
+    render json: candidaturas
   end
 
   def show
-    result = Candidaturas::Show.call(id: params[:id])
-    render json: result.data, status: result.status
+    candidatura = V1::Candidatura.find(params[:id])
+    render json: candidatura
   end
 
   def create
-    result = Candidaturas::Create.call(params: candidatura_params)
-    render json: result.data, status: result.status
+    candidatura = V1::Candidatura.new(candidatura_params)
+    candidatura.save
+    render Serializer.run(candidatura)
   end
 
   def ranking
-    result = Candidaturas::Ranking.call(id: params[:vaga_id])
-    render json: result.data, status: result.status
+    candidaturas = V1::Candidatura.ranking(params[:candidatura_id])
+    render json: candidaturas
   end
 
   private
 
   def candidatura_params
-    params.require(:candidatura).permit(:id_pessoa, :id_vaga)
+    params.require(:candidatura).permit(:id_pessoa, :id_candidatura)
   end
 end

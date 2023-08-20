@@ -64,8 +64,11 @@ Para o cálculo do foi utilizado as os passos abaixo:
 
   * Será calculado a distância entre a localização do candidato e a vaga através do Algorítimo de Dijkstra. Essa resultado será localizado na tabela informada na documentação do teste e a menor distância. Ao final desse processo a função retornará o percurso, no formato ('A --> B --> D --> F') e menor distãncia.
 
+##### 4. Verifica a distância
 
-##### 4. Diferença dos níveis
+  * Se a distância encontrada no passo anterior for maior que a distância máxima do usuário o Score será zerado e os próximos passos não serão executados.
+
+##### 5. Diferença dos níveis
 
   * Após o calculo da diferença entre os níveis da vaga e do candidado, será feito a verificação conforme solicitado da documentação do teste.
 

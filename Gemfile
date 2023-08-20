@@ -55,6 +55,5 @@ group :development do
   # gem "spring"
 end
 
-gem 'interactor', '~> 3.0'
 gem 'rswag-api'
 gem 'rswag-ui'

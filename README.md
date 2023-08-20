@@ -3,6 +3,7 @@
 Essa é uma aplicação que servirá como teste técnico com objetivo de cumprir uma das etapas do processo seletivo e onde será avaliada pela equipe de TI da Vagas.com.
 
 
+
 ## Informações técnicas
 
 - Aplicação desenvolvida com ruby 3.1.4 e Ruby on Rails 7.0.7
@@ -10,6 +11,7 @@ Essa é uma aplicação que servirá como teste técnico com objetivo de cumprir
 - Os testes foi criados e efetuados com as gems **rspec-rails**, **faker**, **factory_bot_rails**, **database_cleaner-active_record**.
 
 - Foi utilizado o **docker** e **docker-compose** que a aplicação possa ser executada através de container.
+
 
 
 ## Executando a aplicação
@@ -42,7 +44,9 @@ http://localhost:9000
 ```
 
 
+
 # Cálculo do Score
+
 
 ### Configurando as variáveis de ambiente ###
 

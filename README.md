@@ -73,7 +73,7 @@ Para o cálculo do foi utilizado as os passos abaixo:
   * Após o calculo da diferença entre os níveis da vaga e do candidado, será feito a verificação conforme solicitado da documentação do teste.
 
 
-##### 5. Resultado
+##### 6. Resultado
 
   * Conforme instruções contidas na documentação o resultado será obtido dividindo por dois a soma da distância e a diferença de nível. Ambos serão obtidos nas tabelas após o seus respectivos cálculs.
 

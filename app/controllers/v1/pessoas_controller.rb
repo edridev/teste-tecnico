@@ -1,6 +1,7 @@
 class V1::PessoasController < V1::ApiController
   def index
-    pessoas = V1::Pessoa.page(page: params[:page], per_page: params[:per_page])
+    sort = params[:sort] || default_sort
+    pessoas = V1::Pessoa.page(page: params[:page], per_page: params[:per_page]).order(sort)
 
     render json: pessoas
   end

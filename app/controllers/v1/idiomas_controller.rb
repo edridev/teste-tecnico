@@ -1,6 +1,7 @@
 class V1::IdiomasController < V1::ApiController
   def index
-    idiomas = V1::Idioma.page(page: params[:page], per_page: params[:per_page])
+    sort = params[:sort] || default_sort
+    idiomas = V1::Idioma.page(page: params[:page], per_page: params[:per_page]).order(sort)
 
     render json: idiomas
   end

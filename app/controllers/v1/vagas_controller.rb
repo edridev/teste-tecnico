@@ -1,6 +1,7 @@
 class V1::VagasController < V1::ApiController
   def index
-    vagas = V1::Vaga.page(page: params[:page], per_page: params[:per_page])
+    sort = params[:sort] || default_sort
+    vagas = V1::Vaga.page(page: params[:page], per_page: params[:per_page]).order(sort)
 
     render json: vagas
   end

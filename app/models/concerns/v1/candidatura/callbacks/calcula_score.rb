@@ -8,11 +8,13 @@ module V1::Candidatura::Callbacks::CalculaScore
     v_titulo = vaga.titulo
     unless match_experiencia?(v_experiencia, v_titulo)
       self.score = 0
+      self.motivo = 'A experiência do usuário não contempla o título da vaga.'
       return
     end
 
     unless match_idioma?
       self.score = 0
+      self.motivo = 'Candidato não possui o idioma solicitado na vaga.'
       return
     end
 
@@ -20,6 +22,12 @@ module V1::Candidatura::Callbacks::CalculaScore
     data = graph.run pessoa.localizacao, vaga.localizacao
     self.percurso = data[:route]
     self.distancia = data[:cost]
+
+    if self.distancia > self.pessoa.distancia_maxima
+      self.score = 0
+      self.motivo = 'Distância cálculada ultrapassa a distância máxima do candidato.'
+      return
+    end
 
     result = (calc_nivel + calc_distancia) / 2
 

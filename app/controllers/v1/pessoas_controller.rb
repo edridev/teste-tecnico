@@ -1,6 +1,6 @@
 class V1::PessoasController < V1::ApiController
   def index
-    pessoas = V1::Pessoa.all
+    pessoas = V1::Pessoa.page(page: params[:page], per_page: params[:per_page])
 
     render json: pessoas
   end

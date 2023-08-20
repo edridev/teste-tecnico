@@ -1,7 +1,6 @@
 class V1::VagasController < V1::ApiController
-
   def index
-    vagas = V1::Vaga.all
+    vagas = V1::Vaga.page(page: params[:page], per_page: params[:per_page])
 
     render json: vagas
   end

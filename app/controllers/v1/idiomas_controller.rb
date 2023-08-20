@@ -1,6 +1,6 @@
 class V1::IdiomasController < V1::ApiController
   def index
-    idiomas = V1::Idioma.all
+    idiomas = V1::Idioma.page(page: params[:page], per_page: params[:per_page])
 
     render json: idiomas
   end

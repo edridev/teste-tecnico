@@ -1,4 +1,6 @@
 class V1::Pessoa < ApplicationRecord
+  include V1::Domain::Pagination
+
   VALID_LOCALIZACAO = %w[A B C D E F]
   NIVEIS = {
     1 => 'estagiário',

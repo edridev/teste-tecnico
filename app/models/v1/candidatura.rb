@@ -1,4 +1,5 @@
 class V1::Candidatura < ApplicationRecord
+  include V1::Domain::Pagination
   include V1::Candidatura::Callbacks::CalculaScore
 
   before_save :calcula_score

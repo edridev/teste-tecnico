@@ -2,8 +2,7 @@ class V1::Candidatura < ApplicationRecord
   include V1::Domain::Pagination
   include V1::Candidatura::Callbacks::CalculaScore
 
-  before_save :calcula_score
-  after_initialize :set_defaults
+  before_validation :calcula_score
 
   belongs_to :pessoa, foreign_key: :id_pessoa
   belongs_to :vaga, foreign_key: :id_vaga
@@ -19,8 +18,4 @@ class V1::Candidatura < ApplicationRecord
       'candidaturas.created_at', 'candidaturas.updated_at'
     ).where('candidaturas.id_vaga = ?', vaga_id).order('candidaturas.score desc')
   }
-
-  def set_defaults
-    self.score = 0
-  end
 end

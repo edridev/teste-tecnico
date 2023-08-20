@@ -1,8 +1,6 @@
 module V1::Candidatura::Callbacks::CalculaScore
   extend ActiveSupport::Concern
 
-  private
-
   def calcula_score
     v_experiencia = pessoa.experiencia
     v_titulo = vaga.titulo
@@ -23,7 +21,7 @@ module V1::Candidatura::Callbacks::CalculaScore
     self.percurso = data[:route]
     self.distancia = data[:cost]
 
-    if self.distancia > self.pessoa.distancia_maxima
+    if distancia > pessoa.distancia_maxima
       self.score = 0
       self.motivo = 'Distância cálculada ultrapassa a distância máxima do candidato.'
       return
@@ -65,4 +63,5 @@ module V1::Candidatura::Callbacks::CalculaScore
       0
     end
   end
+  
 end

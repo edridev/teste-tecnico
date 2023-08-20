@@ -18,9 +18,8 @@ class V1::CandidaturasController < V1::ApiController
   end
 
   def ranking
-    sort = 'candidaturas.created_at desc' || default_sort
     candidaturas = V1::Candidatura.ranking(params[:vaga_id]).page(page: params[:page],
-                                                                  per_page: params[:per_page]).order(sort)
+                                                                  per_page: params[:per_page]).order('candidaturas.score desc')
     render json: candidaturas
   end
 

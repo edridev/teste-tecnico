@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_08_19_170007) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "candidaturas", force: :cascade do |t|
     t.integer "id_pessoa"
     t.integer "id_vaga"
@@ -33,8 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_170007) do
   end
 
   create_table "idiomas_pessoas", id: false, force: :cascade do |t|
-    t.bigint "idioma_id", null: false
-    t.bigint "pessoa_id", null: false
+    t.integer "idioma_id", null: false
+    t.integer "pessoa_id", null: false
     t.index ["idioma_id", "pessoa_id"], name: "index_idiomas_pessoas_on_idioma_id_and_pessoa_id"
     t.index ["pessoa_id"], name: "index_idiomas_pessoas_on_pessoa_id"
   end

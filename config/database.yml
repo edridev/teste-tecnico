@@ -1,28 +1,16 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  port: 5432
+  timeout: 5000
 
 development:
   <<: *default
-  host: 0.0.0.0
-  username: postgres
-  password: "dev_passwd!1456"
-  database: vagasdb_development
+  database: db/development.sqlite3
 
 test:
   <<: *default
-  host: 0.0.0.0
-  username: postgres
-  password: "dev_passwd!1456"
-  database: vagasdb_test
+  database: db/test.sqlite3
 
 production:
   <<: *default
-  host: <%= ENV['POSTGRES_HOST'] %>
-  database: <%= ENV['POSTGRES_DB'] %>
-  username: <%= ENV['POSTGRES_USER'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  database: db/production.sqlite3

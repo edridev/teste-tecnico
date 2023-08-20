@@ -1,4 +1,6 @@
-FROM ruby:3.1.4
+FROM ruby:3.1.4-alpine3.18
+
+ENV BUNDLER_VERSION=2.4.18
 
 RUN apk add --update --no-cache \
     binutils-gold \
@@ -17,29 +19,26 @@ RUN apk add --update --no-cache \
     libxslt-dev \
     libgcrypt-dev \
     make \
-    netcat-openbsd \
-    nodejs \
     openssl \
     pkgconfig \
     postgresql-dev \
-    python \
-    tzdata
+    tzdata \
+    yarn
+
+RUN gem install bundler -v 2.4.18
 
 WORKDIR /rails
 
 ENV RAILS_LOG_TO_STDOUT="1" \
     RAILS_SERVE_STATIC_FILES="true" \
     RAILS_ENV="production" \
+    DISABLE_DATABASE_ENVIRONMENT_CHECK=1 \
     BUNDLE_WITHOUT="development"
 
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install
+RUN bundle check || bundle install
 
 COPY . .
 
 ENTRYPOINT [ "/rails/bin/docker-entrypoint.sh" ]
-
-EXṔOSE 3000
-
-CMD ["./bin/rails", "server"]

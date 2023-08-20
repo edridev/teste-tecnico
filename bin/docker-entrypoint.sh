@@ -1,8 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
-if [ "${*}" == "./bin/rails server" ]; then
-    ./bin/rails db:create
-    ./bin/rails db:prepare
+set -e
+
+if [ -f tmp/pids/server.pid ]; then
+  rm tmp/pids/server.pid
 fi
 
 exec "${@}"
+
+bundle exec rails s -b 0.0.0.0
